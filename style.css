@@ -1,0 +1,103 @@
+/* layout */
+main {
+  display: grid;
+  grid-template-areas:
+    "calendar editor"
+    "display editor";
+  padding: 28px 35px;
+  gap: 18px 22px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editor,
+.calendar,
+.display {
+  background-color: var(--white);
+  border-radius: 1.4rem;
+}
+
+.editor {
+  grid-area: editor;
+  padding: 22px;
+}
+
+.calendar {
+  grid-area: calendar;
+}
+
+.display {
+  grid-area: display;
+  position: relative;
+  padding: 16px;
+}
+
+.display::before {
+  content: "";
+  position: absolute;
+  border-top: 0 solid transparent;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 14px solid var(--white);
+  top: -14px;
+  right: 48px;
+}
+
+/* input */
+.inp-title {
+  border: 1px solid var(--gray);
+  font-size: 2rem;
+  height: 50px;
+}
+
+.inp-title:focus {
+  outline: 2px solid var(--main);
+}
+
+/* button */
+.btn-add {
+  width: 100px;
+  align-self: flex-end;
+}
+
+/* dates */
+.display-date {
+  display: flex;
+  gap: 5px;
+}
+
+.display-date .date {
+  font-size: 2.4rem;
+}
+
+.display-date .day {
+  display: inline-block;
+  font-size: 1.4rem;
+  color: var(--gray-700);
+  align-self: flex-end;
+}
+
+/* display */
+.display h2 {
+  font-size: 1.6rem;
+  margin-top: 1em;
+}
+
+.display p {
+  font-size: 1.4rem;
+  min-height: fit-content;
+}
+
+.display button {
+  font-size: 1.2rem;
+}
+
+/* memo list */
+#memo-list {
+  height: 266px;
+  overflow-y: scroll;
+}

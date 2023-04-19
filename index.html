@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Greeny Notepad</title>
+	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+	<link rel="stylesheet" href="./common.css">
+	<link rel="stylesheet" href="./style.css">
+	<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+</head>
+
+<body>
+	<main>
+		<section class="editor">
+			<form id="memo-form" action="#">
+				<label for="title" class="a11y-hidden">메모 제목</label>
+				<input type="text" name="title" id="title" class="inp-title" placeholder="제목을 입력하세요" required />
+				<div id="editor"></div>
+				<button type="submit" id="memo-add-button" class="btn-add">작성하기</button>
+			</form>
+		</section>
+		<section class="calendar"></section>
+		<section class="display">
+			<div class="display-date">
+				<span class="date">19</span>
+				<span class="day">WED</span>
+			</div>
+			<ul id="memo-list"></ul>
+		</section>
+	</main>
+</body>
+
+</html>

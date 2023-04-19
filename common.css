@@ -1,0 +1,57 @@
+:root {
+  --white: #fff;
+  --gray-700: #767676;
+  --gray: #d9d9d9;
+  --main: #4fc08d;
+
+  font-size: 10px;
+  font-family: "SUIT", sans-serif;
+  background-color: var(--main);
+}
+
+.a11y-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+body,
+button,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background-color: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+[class^="btn"] {
+  padding: 8px 25px;
+  color: var(--main);
+  background-color: var(--white);
+  border: 1px solid;
+  border-radius: 3em;
+  font-weight: bold;
+}
+
+[class^="btn"]:hover,
+[class^="btn"]:active {
+  color: var(--white);
+  background-color: var(--main);
+}
