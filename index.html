@@ -14,8 +14,13 @@
 </head>
 
 <body>
+	<h1 class="a11y-hidden">그리니 메모장</h1>
+	<!-- main -->
 	<main>
+
+		<!-- editor -->
 		<section class="editor">
+			<h2 class="a11y-hidden">메모 작성 에디터</h2>
 			<form id="memo-form" action="#">
 				<label for="title" class="a11y-hidden">메모 제목</label>
 				<input type="text" name="title" id="title" class="inp-title" placeholder="제목을 입력하세요" required />
@@ -23,15 +28,27 @@
 				<button type="submit" id="memo-add-button" class="btn-add">작성하기</button>
 			</form>
 		</section>
-		<section class="calendar"></section>
+		<!-- // editor -->
+
+		<!-- caledar -->
+		<section class="calendar">
+			<h2 class="a11y-hidden">달력</h2>
+		</section>
+		<!-- // caledar -->
+
+		<!-- display -->
 		<section class="display">
+			<h2 class="a11y-hidden">메모 리스트 보기</h2>
 			<div class="display-date">
 				<span class="date">19</span>
 				<span class="day">WED</span>
 			</div>
 			<ul id="memo-list"></ul>
 		</section>
+		<!-- // display -->
+
 	</main>
+	<!-- // main -->
 </body>
 
 </html>
