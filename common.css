@@ -48,6 +48,7 @@ button {
   border: 1px solid;
   border-radius: 3em;
   font-weight: bold;
+  transition: all 0.2s ease-in-out;
 }
 
 [class^="btn"]:hover,
