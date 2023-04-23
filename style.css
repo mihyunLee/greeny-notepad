@@ -100,8 +100,9 @@ main {
 }
 
 .display p {
-  font-size: 1.4rem;
-  min-height: fit-content;
+  font-size: 1.6rem;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .display button {

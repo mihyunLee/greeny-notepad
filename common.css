@@ -75,3 +75,8 @@ button {
   color: var(--white);
   background-color: var(--main);
 }
+
+.toastui-editor-contents,
+.ProseMirror {
+  font-size: 1.6rem;
+}
