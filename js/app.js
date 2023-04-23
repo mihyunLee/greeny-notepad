@@ -1,4 +1,6 @@
-const $ = (selector) => document.querySelector(selector);
+import { parseMd } from "./markdown.js";
+
+export const $ = (selector) => document.querySelector(selector);
 
 let allMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
 let today = new Date();

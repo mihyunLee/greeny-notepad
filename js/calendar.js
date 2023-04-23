@@ -1,3 +1,5 @@
+import { $ } from "./app.js";
+
 // -- Variables
 let DAYOFWEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 

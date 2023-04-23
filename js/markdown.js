@@ -1,5 +1,5 @@
 // https://codepen.io/kvendrik/pen/bGKeEE
-function parseMd(md) {
+export function parseMd(md) {
   //ul
   md = md.replace(/^\s*\n\*/gm, "<ul>\n*");
   md = md.replace(/^(\*.+)\s*\n([^\*])/gm, "$1\n</ul>\n\n$2");
