@@ -22,6 +22,10 @@
   position: absolute;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body,
 button,
 ul,
@@ -42,6 +46,10 @@ table {
   border: 0;
   border-spacing: 0px;
   border-collapse: collapse;
+}
+
+body {
+  height: 100vh;
 }
 
 button {

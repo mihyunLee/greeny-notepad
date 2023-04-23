@@ -1,5 +1,6 @@
 /* layout */
 main {
+  height: 100%;
   display: grid;
   grid-template: repeat(2, 1fr) / 1fr 3fr;
   grid-template-areas:
@@ -36,9 +37,9 @@ main {
   grid-area: display;
   position: relative;
   padding: 16px 6px 16px 16px;
-
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .display::before {
@@ -68,6 +69,11 @@ main {
 .btn-add {
   width: 100px;
   align-self: flex-end;
+}
+
+.btn-del {
+  display: block;
+  margin-left: auto;
 }
 
 /* dates */
@@ -104,9 +110,8 @@ main {
 
 /* memo list */
 #memo-list {
-  flex-basis: 350px; /* FIXME: 정확한 값이 아니므로 수정 필요*/
-  flex-grow: 1;
-  overflow-y: scroll;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 #memo-list::-webkit-scrollbar {
@@ -123,6 +128,11 @@ main {
   background-color: var(--gray);
   border-radius: 30px;
 }
+
+#memo-list li {
+  margin-right: 10px;
+}
+
 /* calendar */
 th:first-child,
 td:first-child {
