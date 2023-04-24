@@ -6,6 +6,9 @@ let DAYOFWEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 let year = new Date().getFullYear(),
   month = new Date().getMonth() + 1;
 
+renderCalendar(year, month);
+initEventListener();
+
 // -- Functions
 // 기존 날짜에 특정 일 수를 더함
 function addDays(day, days) {
@@ -56,14 +59,34 @@ function createTemplate(newYear, newMonth) {
 }
 
 // 캘린더 렌더링
-function renderCalendar() {
-  const [days, dates] = createTemplate(year, month);
-  const captionYear = year,
-    captionMonth = new Date().toString().slice(4, 7);
+function renderCalendar(pYear, pMonth) {
+  const newDate = new Date(pYear, pMonth - 1);
+  const newYear = newDate.getFullYear();
+  const newMonth = newDate.getMonth();
 
-  $("#calendar-content time").dateTime = `${year}-0${month}`;
+  const [days, dates] = createTemplate(newYear, newMonth + 1);
+  const captionYear = newYear,
+    captionMonth = newDate.toString().slice(4, 7);
+
+  $("#calendar-content time").dateTime = `${newYear}-0${newMonth + 1}`;
   $("#calendar-year-month").textContent = `${captionMonth} ${captionYear}`;
   $("#calendar-content tbody").innerHTML = `<tr>${days}</tr>${dates}`;
 }
 
-renderCalendar();
+function initEventListener() {
+  $("#calendar-content").addEventListener("click", (e) => {
+    // 이전 달 버튼 클릭
+    if (e.target.classList.contains("calendar-button-prev")) {
+      month -= 1;
+      renderCalendar(year, month);
+      return;
+    }
+
+    // 다음 달 버튼 클릭
+    if (e.target.classList.contains("calendar-button-next")) {
+      month += 1;
+      renderCalendar(year, month);
+      return;
+    }
+  });
+}
