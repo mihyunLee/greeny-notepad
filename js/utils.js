@@ -1,3 +1,22 @@
+export const $ = (selector) => document.querySelector(selector);
+
+// 오늘 날짜와 특정 날짜 비교
+export function compareDate(origin, target) {
+  const originDate = new Date(
+    origin.getFullYear(),
+    origin.getMonth(),
+    origin.getDate()
+  );
+  const targetDate = new Date(
+    target.getFullYear(),
+    target.getMonth(),
+    target.getDate()
+  );
+
+  return originDate.getTime() === targetDate.getTime();
+}
+
+// markdown parser
 // https://codepen.io/kvendrik/pen/bGKeEE
 export function parseMd(md) {
   //ul

@@ -152,6 +152,19 @@ th {
 
 td {
   padding: 15px 20px 25px 20px;
+  cursor: pointer;
+}
+
+td.today {
+  background-color: var(--main);
+  border-radius: 5px;
+  color: var(--white);
+  font-weight: bold;
+}
+
+td.not-curMonth {
+  color: var(--gray);
+  pointer-events: none;
 }
 
 #calendar-content {
@@ -176,12 +189,4 @@ td {
   font-size: inherit;
   background-color: transparent;
   color: var(--gray-700);
-}
-
-.today {
-  color: var(--main);
-}
-
-.not-curMonth {
-  color: var(--gray);
 }

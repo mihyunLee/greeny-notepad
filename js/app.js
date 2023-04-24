@@ -1,6 +1,4 @@
-import { parseMd } from "./markdown.js";
-
-export const $ = (selector) => document.querySelector(selector);
+import { $, compareDate, parseMd } from "./utils.js";
 
 let allMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
 let today = new Date();
@@ -49,22 +47,6 @@ function remove(e) {
   localStorage.setItem("allMemo", JSON.stringify(allMemo));
 
   render();
-}
-
-// 오늘 날짜와 메모의 날짜 비교
-function compareDate(origin, target) {
-  const originDate = new Date(
-    origin.getFullYear(),
-    origin.getMonth(),
-    origin.getDate()
-  );
-  const targetDate = new Date(
-    target.getFullYear(),
-    target.getMonth(),
-    target.getDate()
-  );
-
-  return originDate.getTime() === targetDate.getTime();
 }
 
 // 화면에 메모 리스트 렌더링

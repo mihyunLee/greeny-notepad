@@ -1,8 +1,9 @@
-import { $ } from "./app.js";
+import { $, compareDate } from "./utils.js";
 
 // -- Variables
 let DAYOFWEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
+let curDate = new Date();
 let year = new Date().getFullYear(),
   month = new Date().getMonth() + 1;
 
@@ -44,13 +45,23 @@ function createTemplate(newYear, newMonth) {
   const days = createDays(newYear, newMonth);
   const dateTemplate = days
     .map((el, idx) => {
-      const dayEl = `<td>${el.getDate()}</td>`;
+      const dayEl = document.createElement("td");
+      dayEl.textContent = el.getDate();
+
+      if (el.getMonth() + 1 !== newMonth) {
+        dayEl.classList.add("not-curMonth");
+      }
+
+      if (compareDate(curDate, el)) {
+        dayEl.classList.add("today");
+      }
+
       if (idx % 7 === 0) {
-        return `<tr>${dayEl}`;
+        return "<tr>" + dayEl.outerHTML;
       } else if ((idx + 1) % 7 === 0) {
-        return `${dayEl}</tr>`;
+        return dayEl.outerHTML + "</tr>";
       } else {
-        return dayEl;
+        return dayEl.outerHTML;
       }
     })
     .join(" ");
