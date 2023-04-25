@@ -1,13 +1,16 @@
 import { $, compareDate } from "./utils.js";
+import { render } from "./app.js";
 
 // -- Variables
 let DAYOFWEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 let curDate = new Date();
+let calendarDate = curDate;
 let year = new Date().getFullYear(),
   month = new Date().getMonth() + 1;
 
 renderCalendar(year, month);
+renderMemo(curDate);
 initEventListener();
 
 // -- Functions
@@ -37,6 +40,16 @@ function createDays(newYear, newMonth) {
   return days;
 }
 
+// 날짜에 해당하는 데이터가 있는지 찾음
+function findData(calendarDate) {
+  const allMemo = JSON.parse(localStorage.getItem("allMemo"));
+  const filterdMemoList = allMemo.filter((el) =>
+    compareDate(calendarDate, new Date(el.date))
+  );
+
+  return filterdMemoList.length;
+}
+
 // 요일및 날짜 템플릿 생성
 function createTemplate(newYear, newMonth) {
   const daysTemplate = DAYOFWEEK.map((el) => `<th scope="col">${el}</th>`).join(
@@ -47,15 +60,24 @@ function createTemplate(newYear, newMonth) {
     .map((el, idx) => {
       const dayEl = document.createElement("td");
       dayEl.textContent = el.getDate();
+      dayEl.dataset.id = el;
 
+      // 이번달에 해당하는 날짜가 아닐 때
       if (el.getMonth() + 1 !== newMonth) {
         dayEl.classList.add("not-curMonth");
       }
 
+      // 오늘일 때
       if (compareDate(curDate, el)) {
         dayEl.classList.add("today");
       }
 
+      // 날짜에 메모가 기입되어 있을 때
+      if (findData(el)) {
+        dayEl.classList.add("mark");
+      }
+
+      // 일주일 별로 날짜 요소 생성
       if (idx % 7 === 0) {
         return "<tr>" + dayEl.outerHTML;
       } else if ((idx + 1) % 7 === 0) {
@@ -84,6 +106,14 @@ function renderCalendar(pYear, pMonth) {
   $("#calendar-content tbody").innerHTML = `<tr>${days}</tr>${dates}`;
 }
 
+// 캘린더 날짜에 따른 메모 렌더링
+function renderMemo(calendarDate) {
+  $(".display-date .date").textContent = calendarDate.getDate();
+  $(".display-date .day").textContent = DAYOFWEEK[calendarDate.getDay()];
+
+  render(calendarDate);
+}
+
 function initEventListener() {
   $("#calendar-content").addEventListener("click", (e) => {
     // 이전 달 버튼 클릭
@@ -98,6 +128,12 @@ function initEventListener() {
       month += 1;
       renderCalendar(year, month);
       return;
+    }
+
+    // 날짜 클릭
+    if (e.target.nodeName === "TD") {
+      calendarDate = new Date(e.target.dataset.id);
+      renderMemo(calendarDate);
     }
   });
 }

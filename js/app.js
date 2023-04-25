@@ -14,7 +14,7 @@ const editor = new Editor({
   placeholder: "내용을 입력해주세요.",
 });
 
-render();
+render(today);
 initEventListener();
 
 // 로컬 스토리지에 새로운 메모 데이터 추가
@@ -28,7 +28,7 @@ function addMemo() {
     localStorage.setItem("allMemo", JSON.stringify(allMemo));
 
     reset();
-    render();
+    render(today);
   }
 }
 
@@ -46,16 +46,16 @@ function remove(e) {
   allMemo = allMemo.filter((memo) => memo.id !== parseInt(li.id));
   localStorage.setItem("allMemo", JSON.stringify(allMemo));
 
-  render();
+  render(today);
 }
 
 // 화면에 메모 리스트 렌더링
-function render() {
+export function render(curDate) {
   $("#memo-list").innerHTML = "";
 
   // 오늘 날짜에 해당하는 메모 리스트
   const filterdMemoList = allMemo.filter((el) =>
-    compareDate(today, new Date(el.date))
+    compareDate(curDate, new Date(el.date))
   );
 
   // 최신 게시물이 위로 올라오도록
