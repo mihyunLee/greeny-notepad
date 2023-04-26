@@ -42,7 +42,7 @@ function createDays(newYear, newMonth) {
 
 // 날짜에 해당하는 데이터가 있는지 찾음
 function findData(calendarDate) {
-  const allMemo = JSON.parse(localStorage.getItem("allMemo"));
+  const allMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
   const filterdMemoList = allMemo.filter((el) =>
     compareDate(calendarDate, new Date(el.date))
   );
@@ -115,6 +115,7 @@ function renderMemo(calendarDate) {
 }
 
 let originTarget = $(".today"); // 이전에 누른 e.target 값을 기록하기 위한 변수
+let todayEl = $(".today");
 function initEventListener() {
   $("#calendar-content").addEventListener("click", (e) => {
     // 이전 달 버튼 클릭
@@ -136,11 +137,14 @@ function initEventListener() {
       // 클릭한 날짜에만 스타일 주기
       const newTarget = e.target;
 
-      if (originTarget !== null && newTarget !== originTarget) {
-        // 이전에 누른 target과 새로 누른 target이 다를 때에만 실행
+      if (originTarget !== null && newTarget !== (originTarget && todayEl)) {
+        // 이전에 누른 target과 새로 누른 target이 다르고, 오늘 날짜가 아닐 때에만 실행
         originTarget.classList.remove("current-date");
         newTarget.classList.add("current-date");
+      } else if (newTarget === todayEl) {
+        originTarget.classList.remove("current-date");
       }
+
       originTarget = newTarget;
 
       // 클릭한 날짜에 맞는 메모 리스트 렌더링
