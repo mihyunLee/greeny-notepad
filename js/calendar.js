@@ -114,6 +114,7 @@ function renderMemo(calendarDate) {
   render(calendarDate);
 }
 
+let originTarget = $(".today"); // 이전에 누른 e.target 값을 기록하기 위한 변수
 function initEventListener() {
   $("#calendar-content").addEventListener("click", (e) => {
     // 이전 달 버튼 클릭
@@ -132,8 +133,21 @@ function initEventListener() {
 
     // 날짜 클릭
     if (e.target.nodeName === "TD") {
+      // 클릭한 날짜에만 스타일 주기
+      const newTarget = e.target;
+
+      if (originTarget !== null && newTarget !== originTarget) {
+        // 이전에 누른 target과 새로 누른 target이 다를 때에만 실행
+        originTarget.classList.remove("current-date");
+        newTarget.classList.add("current-date");
+      }
+      originTarget = newTarget;
+
+      // 클릭한 날짜에 맞는 메모 리스트 렌더링
       calendarDate = new Date(e.target.dataset.id);
       renderMemo(calendarDate);
+
+      return;
     }
   });
 }
