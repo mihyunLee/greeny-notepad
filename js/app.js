@@ -42,7 +42,6 @@ function reset() {
 // 메모 삭제
 function remove(e) {
   const li = e.target.parentElement;
-  console.log(li);
   li.remove();
   allMemo = allMemo.filter((memo) => memo.id !== parseInt(li.id));
   localStorage.setItem("allMemo", JSON.stringify(allMemo));
