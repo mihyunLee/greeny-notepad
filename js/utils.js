@@ -1,5 +1,7 @@
 export const $ = (selector) => document.querySelector(selector);
 
+export let DAYOFWEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
 // 오늘 날짜와 특정 날짜 비교
 export function compareDate(origin, target) {
   const originDate = new Date(

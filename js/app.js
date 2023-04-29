@@ -1,4 +1,5 @@
-import { $, compareDate, parseMd } from "./utils.js";
+import { $, DAYOFWEEK, compareDate, parseMd } from "./utils.js";
+import { renderCalendar } from "./calendar.js";
 
 let allMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
 let today = new Date();
@@ -74,6 +75,9 @@ export function render(curDate) {
     memoItem.appendChild(deleteMemoBtn);
     $("#memo-list").appendChild(memoItem);
   }
+
+  $(".display-date .date").textContent = curDate.getDate();
+  $(".display-date .day").textContent = DAYOFWEEK[curDate.getDay()];
 }
 
 function initEventListener() {
@@ -83,12 +87,16 @@ function initEventListener() {
   });
 
   // 메모 추가
-  $("#memo-add-button").addEventListener("click", addMemo);
+  $("#memo-add-button").addEventListener("click", () => {
+    addMemo();
+    renderCalendar(today.getFullYear(), today.getMonth() + 1);
+  });
 
   // 메모 삭제
   $("#memo-list").addEventListener("click", (e) => {
     if (e.target.classList.contains("btn-del")) {
       remove(e);
+      renderCalendar(today.getFullYear(), today.getMonth() + 1);
     }
   });
 }

@@ -1,16 +1,14 @@
-import { $, compareDate } from "./utils.js";
+import { $, DAYOFWEEK, compareDate } from "./utils.js";
 import { render } from "./app.js";
 
 // -- Variables
-let DAYOFWEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-
+let savedMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
 let curDate = new Date();
 let calendarDate = curDate;
 let year = new Date().getFullYear(),
   month = new Date().getMonth() + 1;
 
 renderCalendar(year, month);
-renderMemo(curDate);
 initEventListener();
 
 // -- Functions
@@ -42,8 +40,8 @@ function createDays(newYear, newMonth) {
 
 // 날짜에 해당하는 데이터가 있는지 찾음
 function findData(calendarDate) {
-  const allMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
-  const filterdMemoList = allMemo.filter((el) =>
+  // const allMemo = JSON.parse(localStorage.getItem("allMemo")) ?? [];
+  const filterdMemoList = savedMemo.filter((el) =>
     compareDate(calendarDate, new Date(el.date))
   );
 
@@ -92,7 +90,7 @@ function createTemplate(newYear, newMonth) {
 }
 
 // 캘린더 렌더링
-function renderCalendar(pYear, pMonth) {
+export function renderCalendar(pYear, pMonth) {
   const newDate = new Date(pYear, pMonth - 1);
   const newYear = newDate.getFullYear();
   const newMonth = newDate.getMonth();
@@ -104,14 +102,6 @@ function renderCalendar(pYear, pMonth) {
   $("#calendar-content time").dateTime = `${newYear}-0${newMonth + 1}`;
   $("#calendar-year-month").textContent = `${captionMonth} ${captionYear}`;
   $("#calendar-content tbody").innerHTML = `<tr>${days}</tr>${dates}`;
-}
-
-// 캘린더 날짜에 따른 메모 렌더링
-function renderMemo(calendarDate) {
-  $(".display-date .date").textContent = calendarDate.getDate();
-  $(".display-date .day").textContent = DAYOFWEEK[calendarDate.getDay()];
-
-  render(calendarDate);
 }
 
 let originTarget = $(".today"); // 이전에 누른 e.target 값을 기록하기 위한 변수
@@ -149,7 +139,7 @@ function initEventListener() {
 
       // 클릭한 날짜에 맞는 메모 리스트 렌더링
       calendarDate = new Date(e.target.dataset.id);
-      renderMemo(calendarDate);
+      render(calendarDate);
 
       return;
     }
