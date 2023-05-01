@@ -30,27 +30,27 @@ main {
 
 .calendar {
   grid-area: calendar;
+  position: relative;
   padding: 16px;
 }
 
-.display {
-  grid-area: display;
-  position: relative;
-  padding: 16px 6px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.display::before {
+.calendar::after {
   content: "";
   position: absolute;
   border-top: 0 solid transparent;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-bottom: 14px solid var(--white);
-  top: -12px;
+  bottom: -18px;
   right: 48px;
+}
+
+.display {
+  grid-area: display;
+  padding: 16px 6px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* input */
@@ -111,7 +111,7 @@ main {
 
 /* memo list */
 #memo-list {
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
 }
 
@@ -132,6 +132,10 @@ main {
 
 #memo-list li {
   margin-right: 10px;
+}
+
+#memo-list img {
+  width: 100%;
 }
 
 /* calendar */
