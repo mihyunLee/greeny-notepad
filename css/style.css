@@ -21,17 +21,21 @@ main {
 .display {
   background-color: var(--white);
   border-radius: 1.4rem;
+  transition: all 0.7s ease-out;
 }
 
 .editor {
   grid-area: editor;
   padding: 22px;
+  width: 100%;
+  min-width: 300px;
 }
 
 .calendar {
   grid-area: calendar;
   position: relative;
   padding: 16px;
+  min-width: 350px;
 }
 
 .calendar::after {
@@ -51,6 +55,7 @@ main {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-width: 350px;
 }
 
 /* input */
@@ -155,7 +160,7 @@ th {
 }
 
 td {
-  padding: 15px 20px 25px 20px;
+  padding: 12px 16px 20px 16px;
   cursor: pointer;
 }
 
@@ -205,8 +210,9 @@ td.current-date {
 td::after {
   content: "";
   display: block;
-  width: 0.6em;
-  height: 0.6em;
+  margin: 0 auto;
+  width: 0.5em;
+  height: 0.5em;
 }
 
 .mark::after {
@@ -214,7 +220,33 @@ td::after {
   display: block;
   margin: 0px auto;
   background-color: var(--orange);
-  width: 0.6em;
-  height: 0.6em;
+  width: 0.5em;
+  height: 0.5em;
   border-radius: 50%;
+}
+
+@media (max-width: 1250px) {
+  main {
+    height: auto;
+    grid-template: 1fr 2fr / repeat(2, 1fr);
+    grid-template-areas:
+      "calendar display"
+      "editor editor";
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .calendar::after {
+    display: none;
+  }
+}
+
+@media (max-width: 780px) {
+  main {
+    grid-template: 1fr 1fr 2fr / 1fr;
+    grid-template-areas:
+      "calendar"
+      "display"
+      "editor";
+  }
 }
