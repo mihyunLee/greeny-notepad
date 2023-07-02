@@ -1,7 +1,7 @@
 # Greeny NotePad 🌿
 
 <div align="center">
-  <img width="860" src="https://github.com/mihyunLee/blogImage/assets/51310674/d416a485-3b64-4f79-a677-c9c219929502" alt="greeny" />
+  <img width="860" src="https://github.com/mihyunLee/blogImage/assets/51310674/1c96eaec-602f-4404-af6f-d050be148296" alt="greeny" />
 </div>
 
 > 개인 프로젝트 <br />
